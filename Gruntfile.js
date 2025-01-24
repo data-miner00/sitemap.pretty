@@ -10,22 +10,18 @@ module.exports = function (grunt) {
   // Register tasks
   grunt.loadTasks("tasks");
 
-  // Run standalone concat tasks
-  grunt.registerTask("concat-js-only", ["concat:js"]);
-  grunt.registerTask("concat-css-only", ["concat:css"]);
-
   grunt.registerTask("default", [
     "clean",
-    "pug",
-    "coffee",
-    "concat",
-    "string-replace",
-    "jshint",
-    "sass",
-    "less",
-    "cssmin",
-    "uglify",
-    "copy",
-    "compress",
+    // "pug",
+    // "coffee",
+    // "concat",
+    // "string-replace",
+    // "jshint",
+    // "sass",
+    // "less",
+    // "cssmin",
+    // "uglify",
+    // "copy",
+    // "compress",
   ]);
 };
