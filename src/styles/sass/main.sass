@@ -1,0 +1,10 @@
+@import "_mixins"
+@import "_variables"
+
+nav ul
+  @include horizontal-list
+
+.sidebar
+  float: left
+  margin-left: fibonacci(4) * 1px
+  background-color: $blue
