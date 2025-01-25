@@ -7,24 +7,11 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-contrib-copy");
 
   var config = {
-    withcss: {
+    default: {
       expand: true,
       cwd: "<%= srcPath %>",
-      src: "**",
+      src: ["index.html", "sitemap.xml", "sitemap.xsl"],
       dest: "<%= distPath %>",
-    },
-    excludecss: {
-      files: [
-        {
-          src: [
-            "<%= srcPath %>/index.html",
-            "<%= srcPath %>/sitemap.xml",
-            "<%= srcPath %>/sitemap.xsl",
-          ],
-          dest: "<%= distPath %>/",
-          filter: "isFile",
-        },
-      ],
     },
   };
 

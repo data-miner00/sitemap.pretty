@@ -21,9 +21,9 @@ module.exports = function (grunt) {
     // "less",
     // "cssmin",
     // "uglify",
-    "copy:excludecss",
+    "copy",
     // "compress",
   ]);
 
-  grunt.registerTask("dev", ["copy:excludecss", "connect:server", "watch"]);
+  grunt.registerTask("dev", ["copy", "connect:server", "watch"]);
 };
