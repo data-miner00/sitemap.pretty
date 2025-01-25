@@ -7,13 +7,9 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-contrib-watch");
 
   var config = {
-    js: {
-      files: ["<%= srcPath %>/*.js"],
-      tasks: ["concat-js-only"],
-    },
-    css: {
-      files: ["<%= srcPath %>/styles/*.css"],
-      tasks: ["concat-css-only"],
+    default: {
+      files: ["<%= srcPath %>/**"],
+      tasks: ["copy"],
     },
   };
 

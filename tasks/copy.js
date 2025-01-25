@@ -7,14 +7,11 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-contrib-copy");
 
   var config = {
-    license: {
-      files: [
-        {
-          src: ["<%= root %>LICENSE"],
-          dest: "<%= distPath %>/",
-          filter: "isFile",
-        },
-      ],
+    default: {
+      expand: true,
+      cwd: "<%= srcPath %>",
+      src: "**",
+      dest: "<%= distPath %>",
     },
   };
 

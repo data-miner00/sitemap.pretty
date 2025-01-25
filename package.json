@@ -2,9 +2,9 @@
   "name": "sitemap.pretty",
   "version": "0.1.0",
   "description": "Styles for sitemap.xml",
-  "main": "dist/app.js",
   "scripts": {
     "build": "grunt",
+    "dev": "grunt dev",
     "test": "node --test",
     "touch": "grunt test-env",
     "watch": "grunt watch",
@@ -13,8 +13,10 @@
   },
   "keywords": [
     "grunt",
-    "tasks",
-    "javascript"
+    "sitemap",
+    "xsl",
+    "xml",
+    "tailwindcss"
   ],
   "author": "Shaun Chong <pkay_@live.com>",
   "license": "MIT",
