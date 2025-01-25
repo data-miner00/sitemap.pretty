@@ -1,7 +1,7 @@
 {
-  "name": "fuktigt",
-  "version": "1.1.0",
-  "description": "Trying out Grunt.js",
+  "name": "sitemap.pretty",
+  "version": "0.1.0",
+  "description": "Styles for sitemap.xml",
   "main": "dist/app.js",
   "scripts": {
     "build": "grunt",
