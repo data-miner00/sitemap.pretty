@@ -6,6 +6,9 @@
 >
     <xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes" />
     <xsl:template match="/">
+        <xsl:variable name="title">Sitemap</xsl:variable>
+        <xsl:variable name="websiteUrl">https://www.example.com</xsl:variable>
+        <xsl:variable name="gitHubUrl">https://github.com/data-miner00/sitemap.pretty</xsl:variable>
         <html>
             <head>
                 <meta charset="utf-8" />
@@ -26,39 +29,63 @@
                     body {
                         font-family: "Inter", sans-serif;
                     }
+
+                    h1 {
+                        font-family: "Italiana", serif;
+                    }
                 </style>
             </head>
-            <body class="bg-gray-900 text-white">
-                <div class="p-12">
-                    <header class="mb-12 border-b border-solid border-gray-700 py-8">
-                        <div class="text-8xl font-bold uppercase mb-2">
-                            Sitemap
+            <body class="overflow-x-hidden">
+                <div class="w-[1080px] mx-auto py-10 border-l border-r border-solid border-black">
+                    <header class="py-8 relative after:absolute after:-left-full after:-right-full after:h-px after:bg-black after:bottom-0">
+                        <div class="flex justify-between items-center px-4">
+                            <div id="now">1 Jan 1998</div>
+                            <div class="flex gap-4 items-center">
+                                <a class="block" title="Visit GitHub" href="{$gitHubUrl}" target="_blank">GitHub</a>
+                                <div>Sitemap version 2</div>
+                                <div class="italic">example.com</div>
+                                <a href="{$websiteUrl}" class="block px-3 py-1 bg-black text-white">Return to website</a>
+                            </div>
                         </div>
-                        <p class="text-gray-500 text-lg mb-1">The list of all pages in Example.com</p>
 
+                        <h1 class="text-center text-6xl lg:text-9xl uppercase py-10">
+                            Sitemap Vogue
+                        </h1>
+                    </header>
+                    
+                    <main class="relative after:absolute after:-left-full after:-right-full after:h-px after:bg-black after:bottom-0">
+                        <xsl:apply-templates />
+                    </main>
+
+                    <footer class="p-4">
                         <p class="text-lg">
                             <xsl:choose>
                                 <xsl:when test="sitemap:sitemapindex">
-                                    This index contains
-                                    <strong class="font-bold "><xsl:value-of select="count(sitemap:sitemapindex/sitemap:sitemap)"/></strong>
+                                    This index contains a total of
+                                    <strong class="font-bold"><xsl:value-of select="count(sitemap:sitemapindex/sitemap:sitemap)"/></strong>
                                     sitemaps.
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    This index contains
+                                    This index contains a total of
                                     <strong class="font-bold"><xsl:value-of select="count(sitemap:urlset/sitemap:url)"/></strong>
                                     URLs.
                                 </xsl:otherwise>
                             </xsl:choose>
                         </p>
-                    </header>
-                    
-                    <main>
-                        <xsl:apply-templates />
-                    </main>
+                        <p>
+                            This is an XML sitemap, meant for consumption by search engines.<br/>
+                            You can find more information about XML sitemaps on <a href="https://sitemaps.org" target="_blank" class="font-bold relative after:absolute after:-bottom-px after:h-px after:left-0 after:right-0 after:bg-black hover:after:h-1 hover:after:-bottom-1 after:transition-all after:duration-150">sitemaps.org</a>.
+                        </p>
+                    </footer>
                 </div>
 
                 <script type="text/javascript">
-                    console.log("Sitemap loaded successfully");
+                    var dateElement = document.querySelector("#now");
+                    dateElement.innerHTML = new Intl.DateTimeFormat("en-US", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                    }).format(new Date());
                 </script>
             </body>
         </html>
@@ -76,26 +103,108 @@
                     <xsl:variable name="pno">
                         <xsl:value-of select="position()" />
                     </xsl:variable>
-                    <li class="my-2">
-                        <a href="{$loc}" class="text-lg font-semibold mb-1">
-                            <xsl:value-of select="sitemap:loc" />
-                        </a>
-                        <div class="">
-                            <xsl:if test="sitemap:lastmod">
-                                <span>
-                                    • <xsl:value-of select="sitemap:lastmod" />
-                                </span>
-                            </xsl:if>
-                            <xsl:if test="sitemap:priority">
-                                <span>
-                                    • <xsl:value-of select="sitemap:priority" />
-                                </span>
-                            </xsl:if>
-                            <xsl:if test="sitemap:changefreq">
-                                <span>
-                                    • <xsl:value-of select="sitemap:changefreq" />
-                                </span>
-                            </xsl:if>
+                    <xsl:variable name="lastmod">
+                        <xsl:value-of select="sitemap:lastmod" />
+                    </xsl:variable>
+                    <li class="border-b border-solid border-black flex h-36 items-center last-of-type:border-b-0">
+                        <div class="basis-36 grid place-items-center h-full border-r border-solid border-black">
+                            <div class="text-3xl font-mono">
+                                <xsl:choose>
+                                    <xsl:when test="$pno &lt; 10">
+                                        <xsl:text>0</xsl:text>
+                                        <xsl:value-of select="$pno" />
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="$pno" />
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </div>
+                        </div>
+                        
+                        <div class="flex-1 px-6">
+                            <div class="mb-1">
+                                <a href="{$loc}" class="text-xl font-serif">
+                                    <xsl:value-of select="sitemap:loc" />
+                                </a>     
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <div>
+                                    <xsl:choose>
+                                        <xsl:when test="sitemap:lastmod">
+                                            <span>
+                                                Updated at
+                                                <time datetime="{$lastmod}">
+                                                    <xsl:value-of select="sitemap:lastmod" />
+                                                </time>
+                                            </span>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <span class="text-gray-400">
+                                                Unknown last modification
+                                            </span>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </div>
+
+                                <div class="text-gray-400">/</div> 
+                                
+                                <div>
+                                    <xsl:choose>
+                                        <xsl:when test="sitemap:priority">
+                                            <xsl:choose>
+                                                <xsl:when test="sitemap:priority &lt; 0.2">
+                                                    <span>
+                                                        Super low priority
+                                                    </span>
+                                                </xsl:when>
+                                                <xsl:when test="sitemap:priority &lt; 0.4">
+                                                    <span>
+                                                        Low priority
+                                                    </span>
+                                                </xsl:when>
+                                                <xsl:when test="sitemap:priority &lt; 0.6">
+                                                    <span>
+                                                        Medium priority
+                                                    </span>
+                                                </xsl:when>
+                                                <xsl:when test="sitemap:priority &lt; 0.8">
+                                                    <span>
+                                                        High priority
+                                                    </span>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <span>
+                                                        Super high priority
+                                                    </span>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <span class="text-gray-400">
+                                                Unknown priority
+                                            </span>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </div>
+
+                                <div class="text-gray-400">/</div> 
+                                
+                                <div>
+                                    <xsl:choose>
+                                        <xsl:when test="sitemap:changefreq">
+                                            <span>
+                                                Purportedly changes every <xsl:value-of select="sitemap:changefreq" />
+                                            </span>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <span class="text-gray-400">
+                                                Unknown change frequency
+                                            </span>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </div>
+                            </div>
                         </div>
                     </li>
                 </xsl:for-each>
