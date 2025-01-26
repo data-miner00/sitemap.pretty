@@ -7,7 +7,12 @@
     <xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes" />
     <xsl:template match="/">
         <xsl:variable name="title">Sitemap</xsl:variable>
-        <xsl:variable name="websiteUrl">https://www.example.com</xsl:variable>
+        <xsl:variable name="websiteUrl">
+            <xsl:value-of select="sitemap:urlset/sitemap:url[1]/sitemap:loc"/>
+        </xsl:variable>
+        <xsl:variable name="websiteUrlWithoutProtocol">
+            <xsl:value-of select="substring-before(substring-after($websiteUrl, '://'), '/')" />
+        </xsl:variable>
         <xsl:variable name="gitHubUrl">https://github.com/data-miner00/sitemap.pretty</xsl:variable>
         <html>
             <head>
@@ -43,8 +48,10 @@
                             <div class="flex gap-4 items-center">
                                 <a class="hidden md:block" title="Visit GitHub" href="{$gitHubUrl}" target="_blank">GitHub</a>
                                 <div class="hidden md:block">Sitemap version 2</div>
-                                <div class="italic hidden md:block">example.com</div>
-                                <a href="{$websiteUrl}" class="block px-3 py-1 bg-black text-white">Return to website</a>
+                                <div class="italic hidden md:block">
+                                    <xsl:value-of select="$websiteUrlWithoutProtocol"></xsl:value-of>
+                                </div> 
+                                <a href="{$websiteUrl}" class="block px-3 py-1 bg-black text-white hover:bg-gray-700 transition-colors duration-150">Return to website</a>
                             </div>
                         </div>
 
