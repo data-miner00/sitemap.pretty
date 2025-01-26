@@ -10,20 +10,7 @@ module.exports = function (grunt) {
   // Register tasks
   grunt.loadTasks("tasks");
 
-  grunt.registerTask("default", [
-    "clean",
-    // "pug",
-    // "coffee",
-    // "concat",
-    // "string-replace",
-    // "jshint",
-    // "sass",
-    // "less",
-    // "cssmin",
-    // "uglify",
-    "copy",
-    // "compress",
-  ]);
+  grunt.registerTask("default", ["clean", "copy"]);
 
   grunt.registerTask("dev", ["copy", "connect:server", "watch"]);
 };
