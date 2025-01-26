@@ -36,19 +36,19 @@
                 </style>
             </head>
             <body class="overflow-x-hidden">
-                <div class="w-[1080px] mx-auto py-10 border-l border-r border-solid border-black">
-                    <header class="py-8 relative after:absolute after:-left-full after:-right-full after:h-px after:bg-black after:bottom-0">
+                <div class="w-full lg:w-[1080px] mx-auto py-5 lg:py-10 lg:border-l lg:border-r border-solid border-black">
+                    <header class="py-2 md:py-8 relative after:absolute after:-left-full after:-right-full after:h-px after:bg-black after:bottom-0">
                         <div class="flex justify-between items-center px-4">
                             <div id="now">1 Jan 1998</div>
                             <div class="flex gap-4 items-center">
-                                <a class="block" title="Visit GitHub" href="{$gitHubUrl}" target="_blank">GitHub</a>
-                                <div>Sitemap version 2</div>
-                                <div class="italic">example.com</div>
+                                <a class="hidden md:block" title="Visit GitHub" href="{$gitHubUrl}" target="_blank">GitHub</a>
+                                <div class="hidden md:block">Sitemap version 2</div>
+                                <div class="italic hidden md:block">example.com</div>
                                 <a href="{$websiteUrl}" class="block px-3 py-1 bg-black text-white">Return to website</a>
                             </div>
                         </div>
 
-                        <h1 class="text-center text-6xl lg:text-9xl uppercase py-10">
+                        <h1 class="text-center text-6xl md:text-8xl lg:text-9xl uppercase py-10">
                             Sitemap Vogue
                         </h1>
                     </header>
@@ -58,7 +58,7 @@
                     </main>
 
                     <footer class="p-4">
-                        <p class="text-lg">
+                        <p class="">
                             <xsl:choose>
                                 <xsl:when test="sitemap:sitemapindex">
                                     This index contains a total of
@@ -106,8 +106,8 @@
                     <xsl:variable name="lastmod">
                         <xsl:value-of select="sitemap:lastmod" />
                     </xsl:variable>
-                    <li class="border-b border-solid border-black flex h-36 items-center last-of-type:border-b-0">
-                        <div class="basis-36 grid place-items-center h-full border-r border-solid border-black">
+                    <li class="border-b border-solid border-black flex-col md:flex-row flex md:h-36 items-center last-of-type:border-b-0">
+                        <div class="md:basis-36 grid place-items-center h-full border-b md:border-b-0 md:border-r border-solid border-black">
                             <div class="text-3xl font-mono">
                                 <xsl:choose>
                                     <xsl:when test="$pno &lt; 10">
