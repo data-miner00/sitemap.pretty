@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "description": "Styles for sitemap.xml",
   "scripts": {
-    "build": "grunt",
+    "build": "npm run build:css && grunt",
     "dev": "grunt dev",
     "test": "node --test",
     "watch": "grunt watch",
     "cloc": "cloc . --vcs=git --exclude-list-file=package-lock.json",
-    "watch:css": "tailwindcss -i ./src/tailwind.css -o ./dist/tailwind.css --watch"
+    "watch:css": "tailwindcss -i ./src/tailwind.css -o ./dist/tailwind.css --watch",
+    "build:css": "tailwindcss -i ./src/tailwind.css -o ./dist/tailwind.min.css --minify"
   },
   "keywords": [
     "grunt",

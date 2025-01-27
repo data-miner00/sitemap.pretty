@@ -10,7 +10,13 @@ module.exports = function (grunt) {
   // Register tasks
   grunt.loadTasks("tasks");
 
-  grunt.registerTask("default", ["clean", "copy"]);
+  grunt.registerTask("default", [
+    "copy",
+    "base64:css",
+    "string-replace:xsl",
+    "base64:xsl",
+    "string-replace:xml",
+  ]);
 
   grunt.registerTask("dev", ["copy", "connect:server", "watch"]);
 };

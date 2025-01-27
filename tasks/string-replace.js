@@ -7,24 +7,38 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-string-replace");
 
   var config = {
-    replaceTask: {
+    xsl: {
       files: [
         {
           expand: true,
           cwd: "<%= distPath %>",
-          src: ["**/**"],
+          src: ["sitemap.xsl"],
           dest: "<%= distPath %>",
         },
       ],
       options: {
         replacements: [
           {
-            pattern: "{{SECRETS}}",
-            replacement: "Hi, this is secret",
+            pattern: "tailwind.css",
+            replacement: "<%= grunt.file.read('dist/css-encoded.txt') %>",
           },
+        ],
+      },
+    },
+    xml: {
+      files: [
+        {
+          expand: true,
+          cwd: "<%= distPath %>",
+          src: ["sitemap.xml"],
+          dest: "<%= distPath %>",
+        },
+      ],
+      options: {
+        replacements: [
           {
-            pattern: "{{SECRETS2}}",
-            replacement: "$$$$ Hi, this is secret $$$$",
+            pattern: "sitemap.xsl",
+            replacement: "<%= grunt.file.read('dist/xsl-encoded.txt') %>",
           },
         ],
       },
