@@ -98,7 +98,48 @@
         </html>
     </xsl:template>
     <xsl:template match="sitemap:sitemapindex">
-        <div>Sitemap Index!</div>
+        <div class="p-4">
+            <p class="mb-4">An index for sitemaps</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Location</th>
+                        <th>Last modified</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <xsl:for-each select="sitemap:sitemap">
+                        <tr>
+                            <xsl:variable name="loc">
+                                <xsl:value-of select="sitemap:loc" />
+                            </xsl:variable>
+                            <xsl:variable name="pno">
+                                <xsl:value-of select="position()" />
+                            </xsl:variable>
+
+                            <td>
+                                <xsl:value-of select="$pno" />
+                            </td>
+                            <td>
+                                <xsl:value-of select="$loc" />
+                            </td>
+                            <td>
+                                <xsl:choose>
+                                    <xsl:when test="sitemap:lastmod">
+                                        <xsl:value-of select="sitemap:lastmod" />
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:text>Last updated unknown</xsl:text>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </td>
+                        </tr>
+                    </xsl:for-each> 
+                </tbody>
+            </table>
+        </div>
     </xsl:template>
     <xsl:template match="sitemap:urlset">
         <div>
