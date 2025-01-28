@@ -8,13 +8,23 @@
     <xsl:template match="/">
         <xsl:variable name="title">Sitemap</xsl:variable>
         <xsl:variable name="websiteUrl">
-            <xsl:value-of select="sitemap:urlset/sitemap:url[1]/sitemap:loc"/>
+            <xsl:choose>
+                <xsl:when test="sitemap:urlset/sitemap:url[1]/sitemap:loc">
+                    <xsl:value-of select="sitemap:urlset/sitemap:url[1]/sitemap:loc"/>
+                </xsl:when>
+                <xsl:when test="sitemap:sitemapindex/sitemap:sitemap[1]/sitemap:loc">
+                    <xsl:value-of select="sitemap:sitemapindex/sitemap:sitemap[1]/sitemap:loc"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:text>www.example.com</xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:variable>
         <xsl:variable name="websiteUrlWithoutProtocol">
             <xsl:value-of select="substring-before(substring-after($websiteUrl, '://'), '/')" />
         </xsl:variable>
         <xsl:variable name="gitHubUrl">https://github.com/data-miner00/sitemap.pretty</xsl:variable>
-        <html>
+        <html lang="en">
             <head>
                 <meta charset="utf-8" />
                 <meta
@@ -56,7 +66,15 @@
                         </div>
 
                         <h1 class="text-center text-6xl md:text-8xl lg:text-9xl uppercase py-10">
-                            Sitemap Vogue
+                            Sitemap
+                            <xsl:choose>
+                                <xsl:when test="sitemap:sitemapindex">
+                                    <xsl:text>Index</xsl:text>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:text>Vogue</xsl:text>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </h1>
                     </header>
                     
@@ -98,47 +116,78 @@
         </html>
     </xsl:template>
     <xsl:template match="sitemap:sitemapindex">
-        <div class="p-4">
-            <p class="mb-4">An index for sitemaps</p>
+        <div class="">
+            <ul>
+                <xsl:for-each select="sitemap:sitemap">
+                    <xsl:variable name="loc">
+                        <xsl:value-of select="sitemap:loc" />
+                    </xsl:variable>
+                    <xsl:variable name="pno">
+                        <xsl:value-of select="position()" />
+                    </xsl:variable>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Location</th>
-                        <th>Last modified</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <xsl:for-each select="sitemap:sitemap">
-                        <tr>
-                            <xsl:variable name="loc">
-                                <xsl:value-of select="sitemap:loc" />
-                            </xsl:variable>
-                            <xsl:variable name="pno">
-                                <xsl:value-of select="position()" />
-                            </xsl:variable>
-
-                            <td>
-                                <xsl:value-of select="$pno" />
-                            </td>
-                            <td>
-                                <xsl:value-of select="$loc" />
-                            </td>
-                            <td>
-                                <xsl:choose>
-                                    <xsl:when test="sitemap:lastmod">
-                                        <xsl:value-of select="sitemap:lastmod" />
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:text>Last updated unknown</xsl:text>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </td>
-                        </tr>
-                    </xsl:for-each> 
-                </tbody>
-            </table>
+                    <xsl:choose>
+                        <xsl:when test="$pno mod 2 = 1">
+                            <li class="flex border-b border-solid border-black last-of-type:border-transparent h-36 items-center">
+                                <div class="h-full basis-36 border-r border-solid border-black grid place-items-center text-2xl text-white bg-black font-mono">
+                                    <div class="">
+                                        <xsl:if test="$pno &lt; 10">
+                                            <xsl:text>0</xsl:text>
+                                        </xsl:if>
+                                        <xsl:value-of select="$pno" />
+                                    </div>
+                                </div>
+                                <div class="px-4">
+                                    <div class="text-xl font-serif">
+                                        <a href="{$loc}" target="_blank">
+                                            <xsl:value-of select="$loc" />
+                                        </a>
+                                    </div>
+                                    <div class="text-left">
+                                        <xsl:choose>
+                                            <xsl:when test="sitemap:lastmod">
+                                                <xsl:value-of select="sitemap:lastmod" />
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:text>Last updated unknown</xsl:text>
+                                            </xsl:otherwise>
+                                        </xsl:choose> 
+                                    </div>
+                                </div>
+                            </li>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <li class="flex flex-row-reverse border-b border-solid border-black last-of-type:border-transparent h-36 items-center">
+                                <div class="h-full basis-36 border-l border-solid border-black grid place-items-center text-2xl text-white bg-black font-mono">
+                                    <div class="">
+                                        <xsl:if test="$pno &lt; 10">
+                                            <xsl:text>0</xsl:text>
+                                        </xsl:if>
+                                        <xsl:value-of select="$pno" />
+                                    </div>
+                                </div>
+                                <div class="px-4">
+                                    <div class="text-xl font-serif">
+                                        <a href="{$loc}" target="_blank">
+                                            <xsl:value-of select="$loc" />
+                                        </a>
+                                    </div>
+                                    <div class="text-right">
+                                        <xsl:choose>
+                                            <xsl:when test="sitemap:lastmod">
+                                                <xsl:value-of select="sitemap:lastmod" />
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:text>Last updated unknown</xsl:text>
+                                            </xsl:otherwise>
+                                        </xsl:choose> 
+                                    </div>
+                                </div>
+                            </li>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:for-each>
+            </ul>
         </div>
     </xsl:template>
     <xsl:template match="sitemap:urlset">
@@ -257,6 +306,13 @@
                     </li>
                 </xsl:for-each>
             </ul>
+        </div>
+    </xsl:template>
+    
+    <!-- Todo: video -->
+    <xsl:template match="sitemap:video">
+        <div>
+            Video
         </div>
     </xsl:template>
 </xsl:stylesheet>

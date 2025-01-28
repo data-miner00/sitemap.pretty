@@ -9,4 +9,16 @@
       <loc>http://www.example.com/sitemap2.xml</loc>
       <lastmod>2005-01-01</lastmod>
    </sitemap>
+   <sitemap>
+      <loc>http://www.example.com/sitemap3.xml</loc>
+      <lastmod>2006-01-01</lastmod>
+   </sitemap>
+   <sitemap>
+      <loc>http://www.example.com/sitemap4.xml</loc>
+      <lastmod>2007-01-01</lastmod>
+   </sitemap>
+   <sitemap>
+      <loc>http://www.example.com/sitemap5.xml</loc>
+      <lastmod>2008-01-01</lastmod>
+   </sitemap>
 </sitemapindex>
