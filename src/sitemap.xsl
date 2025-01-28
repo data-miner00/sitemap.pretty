@@ -203,6 +203,34 @@
                     <xsl:variable name="lastmod">
                         <xsl:value-of select="sitemap:lastmod" />
                     </xsl:variable>
+                    <xsl:variable name="changefreq">
+                        <xsl:value-of select="sitemap:changefreq" />
+                    </xsl:variable>
+                    <xsl:variable name="friendlychangefreq">
+                        <xsl:choose>
+                            <xsl:when test="sitemap:changefreq = 'always'">
+                                <xsl:text>all the time</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="sitemap:changefreq = 'hourly'">
+                                <xsl:text>every hour</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="sitemap:changefreq = 'daily'">
+                                <xsl:text>every day</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="sitemap:changefreq = 'weekly'">
+                                <xsl:text>every week</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="sitemap:changefreq = 'monthly'">
+                                <xsl:text>every month</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="sitemap:changefreq = 'yearly'">
+                                <xsl:text>every year</xsl:text>
+                            </xsl:when>
+                            <xsl:when test="sitemap:changefreq = 'never'">
+                                <xsl:text>once in an eternity</xsl:text>
+                            </xsl:when>
+                        </xsl:choose>
+                    </xsl:variable>
                     <li class="border-b border-solid border-black flex-col md:flex-row flex md:h-36 items-center last-of-type:border-b-0">
                         <div class="md:basis-36 grid place-items-center h-full border-b md:border-b-0 md:border-r border-solid border-black">
                             <div class="text-3xl font-mono">
@@ -290,8 +318,8 @@
                                 <div>
                                     <xsl:choose>
                                         <xsl:when test="sitemap:changefreq">
-                                            <span>
-                                                Purportedly changes every <xsl:value-of select="sitemap:changefreq" />
+                                            <span title="{$changefreq}">
+                                                Purportedly changes <xsl:value-of select="$friendlychangefreq" />
                                             </span>
                                         </xsl:when>
                                         <xsl:otherwise>
@@ -309,10 +337,4 @@
         </div>
     </xsl:template>
     
-    <!-- Todo: video -->
-    <xsl:template match="sitemap:video">
-        <div>
-            Video
-        </div>
-    </xsl:template>
 </xsl:stylesheet>
