@@ -52,7 +52,7 @@
             </head>
             <body class="overflow-x-hidden">
                 <div class="w-full lg:w-[1080px] mx-auto py-5 lg:py-10 lg:border-l lg:border-r border-solid border-black">
-                    <header class="py-2 md:py-8 relative after:absolute after:-left-full after:-right-full after:h-px after:bg-black after:bottom-0">
+                    <header class="py-2 md:py-8 relative after:absolute after:-left-full after:-right-full after:h-px after:bg-black after:bottom-0 overflow-x-hidden">
                         <div class="flex justify-between items-center px-4">
                             <div id="now">1 Jan 1998</div>
                             <div class="flex gap-4 items-center">
@@ -78,7 +78,7 @@
                         </h1>
                     </header>
                     
-                    <main class="relative after:absolute after:-left-full after:-right-full after:h-px after:bg-black after:bottom-0">
+                    <main class="relative after:absolute after:-left-full after:-right-full after:h-px after:bg-black after:bottom-0 overflow-x-hidden">
                         <xsl:apply-templates />
                     </main>
 
@@ -231,8 +231,8 @@
                             </xsl:when>
                         </xsl:choose>
                     </xsl:variable>
-                    <li class="border-b border-solid border-black flex-col md:flex-row flex md:h-36 items-center last-of-type:border-b-0">
-                        <div class="md:basis-36 grid place-items-center h-full border-b md:border-b-0 md:border-r border-solid border-black">
+                    <li class="border-b border-solid border-black md:flex-row md:flex md:h-36 items-center last-of-type:border-b-0">
+                        <div class="md:basis-36 grid place-items-center h-20 md:h-full border-b md:border-b-0 md:border-r border-solid border-black w-full md:w-auto">
                             <div class="text-3xl font-mono">
                                 <xsl:choose>
                                     <xsl:when test="$pno &lt; 10">
@@ -246,14 +246,14 @@
                             </div>
                         </div>
                         
-                        <div class="flex-1 px-6">
-                            <div class="mb-1">
+                        <div class="flex-1 px-4 md:px-6 py-6 md:py-0">
+                            <div class="mb-4 md:mb-1">
                                 <a href="{$loc}" class="text-xl font-serif">
                                     <xsl:value-of select="sitemap:loc" />
                                 </a>     
                             </div>
 
-                            <div class="flex items-center gap-2">
+                            <div class="flex flex-col md:flex-row md:items-center gap-2">
                                 <div>
                                     <xsl:choose>
                                         <xsl:when test="sitemap:lastmod">
@@ -272,7 +272,7 @@
                                     </xsl:choose>
                                 </div>
 
-                                <div class="text-gray-400">/</div> 
+                                <div class="hidden md:block text-gray-400">/</div> 
                                 
                                 <div>
                                     <xsl:choose>
@@ -313,7 +313,7 @@
                                     </xsl:choose>
                                 </div>
 
-                                <div class="text-gray-400">/</div> 
+                                <div class="hidden md:block text-gray-400">/</div> 
                                 
                                 <div>
                                     <xsl:choose>
