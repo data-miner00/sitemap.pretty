@@ -37,6 +37,12 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: List files
+        run: |
+           ls
+           ls dist
+        shell: bash
+
       - name: Test
         run: npm test
 
@@ -47,6 +53,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-and-test
     steps:
+      - name: List files
+        run: ls
+        shell: bash
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
