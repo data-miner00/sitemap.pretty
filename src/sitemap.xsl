@@ -4,7 +4,8 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9"
 >
-    <xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes" />
+    <xsl:output method="html" doctype-public="XSLT-compat" version="1.0" encoding="UTF-8" indent="yes" />
+    
     <xsl:template match="/">
         <xsl:variable name="title">Sitemap</xsl:variable>
         <xsl:variable name="websiteUrl">
@@ -52,7 +53,7 @@
             </head>
             <body class="overflow-x-hidden">
                 <div class="w-full lg:w-[1080px] mx-auto py-5 lg:py-10 lg:border-l lg:border-r border-solid border-black">
-                    <header class="py-2 md:py-8 relative after:absolute after:-left-full after:-right-full after:h-px after:bg-black after:bottom-0 overflow-x-hidden">
+                    <header class="py-2 md:py-8 relative after:absolute after:left-0 after:right-0 after:lg:-left-full after:lg:-right-full after:h-px after:bg-black after:bottom-0">
                         <div class="flex justify-between items-center px-4">
                             <div id="now">1 Jan 1998</div>
                             <div class="flex gap-4 items-center">
@@ -78,7 +79,7 @@
                         </h1>
                     </header>
                     
-                    <main class="relative after:absolute after:-left-full after:-right-full after:h-px after:bg-black after:bottom-0 overflow-x-hidden">
+                    <main class="relative after:absolute after:left-0 after:right-0 after:lg:-left-full after:lg:-right-full after:h-px after:bg-black after:bottom-0">
                         <xsl:apply-templates />
                     </main>
 
@@ -115,6 +116,7 @@
             </body>
         </html>
     </xsl:template>
+
     <xsl:template match="sitemap:sitemapindex">
         <div class="">
             <ul>
@@ -190,6 +192,7 @@
             </ul>
         </div>
     </xsl:template>
+
     <xsl:template match="sitemap:urlset">
         <div>
             <ul>
@@ -234,15 +237,10 @@
                     <li class="border-b border-solid border-black md:flex-row md:flex md:h-36 items-center last-of-type:border-b-0">
                         <div class="md:basis-36 grid place-items-center h-20 md:h-full border-b md:border-b-0 md:border-r border-solid border-black w-full md:w-auto">
                             <div class="text-3xl font-mono">
-                                <xsl:choose>
-                                    <xsl:when test="$pno &lt; 10">
-                                        <xsl:text>0</xsl:text>
-                                        <xsl:value-of select="$pno" />
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:value-of select="$pno" />
-                                    </xsl:otherwise>
-                                </xsl:choose>
+                                <xsl:if test="$pno &lt; 10">
+                                    <xsl:text>0</xsl:text>
+                                </xsl:if>
+                                <xsl:value-of select="$pno" />
                             </div>
                         </div>
                         
@@ -336,5 +334,5 @@
             </ul>
         </div>
     </xsl:template>
-    
+
 </xsl:stylesheet>
