@@ -4,6 +4,23 @@
 
 ![thumbnail for the project](images/thumbnail.png)
 
+## Usages
+
+To use the stylesheet, just add the following one liner in the top of your XML file after the XML declaration header.
+
+```xml
+<?xml-stylesheet href="..." type="text/xsl"?>
+```
+
+The `href` attribute is where it points to the XSLT stylesheet file. Here are the 3 ways you can do that.
+
+1. By CDN. However, I am still working on this and is unavailable at the moment.
+2. By base 64. The digest can be found in `xsl-encoded.txt` that starts with `data:text/xsl;base64` in the release artifact.
+   ```xml
+   <?xml-stylesheet href="data:text/xsl;base64,PD94b...D4NCg==" type="text/xsl"?>
+   ```
+3. Host the stylesheet yourself. You can download either `sitemap.xsl` or `sitemap.min.xsl` and host it in your hosting provider
+
 ## Getting Started
 
 1. Install packages with `npm i`.
