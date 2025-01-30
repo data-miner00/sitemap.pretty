@@ -7,7 +7,6 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON("package.json"),
   });
 
-  // Register tasks
   grunt.loadTasks("tasks");
 
   grunt.registerTask("default", [
@@ -16,6 +15,7 @@ module.exports = function (grunt) {
     "string-replace:xsl",
     "base64:xsl",
     "string-replace:xml",
+    "xmlmin",
   ]);
 
   grunt.registerTask("dev", ["copy", "connect:server", "watch"]);
