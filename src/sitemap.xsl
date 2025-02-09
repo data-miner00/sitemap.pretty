@@ -110,6 +110,11 @@
                         <p>
                             This sitemap is rendered with XSLT version: <xsl:value-of select="system-property('xsl:version')"/>
                         </p>
+                        <xsl:comment>
+                            XSLT Version = <xsl:copy-of select="system-property('xsl:version')"/>
+                            XSLT Vendor = <xsl:copy-of select="system-property('xsl:vendor')"/>
+                            XSLT Vendor URL = <xsl:copy-of select="system-property('xsl:vendor-url')"/>
+                        </xsl:comment>
                     </footer>
                 </div>
 
