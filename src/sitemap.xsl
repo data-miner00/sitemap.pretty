@@ -3,6 +3,8 @@
     version="2.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:date="http://exslt.org/dates-and-times"
+    extension-element-prefixes="date"
 >
     <xsl:output method="html" doctype-public="XSLT-compat" encoding="UTF-8" indent="yes" />
     
@@ -56,6 +58,9 @@
                     <header class="py-2 md:py-8 relative after:absolute after:left-0 after:right-0 after:lg:-left-full after:lg:-right-full after:h-px after:bg-black after:bottom-0" role="banner" aria-label="Site header">
                         <div class="flex justify-between items-center px-4">
                             <div id="now" aria-label="Current date">1 Jan 1998</div>
+                            <!-- <p>
+                                <xsl:value-of select="date:date-time()"/>
+                            </p> -->
                             <nav class="flex gap-4 items-center" role="navigation" aria-label="Main navigation">
                                 <a class="hidden md:block" aria-label="Visit GitHub repository" href="{$gitHubUrl}" target="_blank" rel="noopener noreferrer">GitHub</a>
                                 <div class="hidden md:block">Sitemap version 2</div>
@@ -101,6 +106,9 @@
                         <p>
                             This is an XML sitemap, meant for consumption by search engines.<br/>
                             You can find more information about XML sitemaps on <a href="https://sitemaps.org" target="_blank" rel="noopener noreferrer" class="font-bold relative after:absolute after:-bottom-px after:h-px after:left-0 after:right-0 after:bg-black hover:after:h-1 hover:after:-bottom-1 after:transition-all after:duration-150">sitemaps.org</a>.
+                        </p>
+                        <p>
+                            This sitemap is rendered with XSLT version: <xsl:value-of select="system-property('xsl:version')"/>
                         </p>
                     </footer>
                 </div>
