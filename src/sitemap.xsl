@@ -4,7 +4,7 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9"
 >
-    <xsl:output method="html" doctype-public="XSLT-compat" version="1.0" encoding="UTF-8" indent="yes" />
+    <xsl:output method="html" doctype-public="XSLT-compat" encoding="UTF-8" indent="yes" />
     
     <xsl:template match="/">
         <xsl:variable name="title">Sitemap</xsl:variable>
@@ -51,22 +51,22 @@
                     }
                 </style>
             </head>
-            <body class="overflow-x-hidden">
+            <body class="overflow-x-hidden" role="document">
                 <div class="w-full lg:w-[1080px] mx-auto py-5 lg:py-10 lg:border-l lg:border-r border-solid border-black">
-                    <header class="py-2 md:py-8 relative after:absolute after:left-0 after:right-0 after:lg:-left-full after:lg:-right-full after:h-px after:bg-black after:bottom-0">
+                    <header class="py-2 md:py-8 relative after:absolute after:left-0 after:right-0 after:lg:-left-full after:lg:-right-full after:h-px after:bg-black after:bottom-0" role="banner" aria-label="Site header">
                         <div class="flex justify-between items-center px-4">
-                            <div id="now">1 Jan 1998</div>
-                            <div class="flex gap-4 items-center">
-                                <a class="hidden md:block" title="Visit GitHub" href="{$gitHubUrl}" target="_blank">GitHub</a>
+                            <div id="now" aria-label="Current date">1 Jan 1998</div>
+                            <nav class="flex gap-4 items-center" role="navigation" aria-label="Main navigation">
+                                <a class="hidden md:block" aria-label="Visit GitHub repository" href="{$gitHubUrl}" target="_blank" rel="noopener noreferrer">GitHub</a>
                                 <div class="hidden md:block">Sitemap version 2</div>
                                 <div class="italic hidden md:block">
                                     <xsl:value-of select="$websiteUrlWithoutProtocol"></xsl:value-of>
                                 </div> 
                                 <a href="{$websiteUrl}" class="block px-3 py-1 bg-black text-white hover:bg-gray-700 transition-colors duration-150">Return to website</a>
-                            </div>
+                            </nav>
                         </div>
 
-                        <h1 class="text-center text-6xl md:text-8xl lg:text-9xl uppercase py-10">
+                        <h1 class="text-center text-6xl md:text-8xl lg:text-9xl uppercase py-10" aria-label="Sitemap title">
                             Sitemap
                             <xsl:choose>
                                 <xsl:when test="sitemap:sitemapindex">
@@ -79,11 +79,11 @@
                         </h1>
                     </header>
                     
-                    <main class="relative after:absolute after:left-0 after:right-0 after:lg:-left-full after:lg:-right-full after:h-px after:bg-black after:bottom-0">
+                    <main class="relative after:absolute after:left-0 after:right-0 after:lg:-left-full after:lg:-right-full after:h-px after:bg-black after:bottom-0" role="main" aria-label="Sitemap content">
                         <xsl:apply-templates />
                     </main>
 
-                    <footer class="p-4">
+                    <footer class="p-4" role="contentinfo" aria-label="Site footer">
                         <p class="">
                             <xsl:choose>
                                 <xsl:when test="sitemap:sitemapindex">
@@ -100,7 +100,7 @@
                         </p>
                         <p>
                             This is an XML sitemap, meant for consumption by search engines.<br/>
-                            You can find more information about XML sitemaps on <a href="https://sitemaps.org" target="_blank" class="font-bold relative after:absolute after:-bottom-px after:h-px after:left-0 after:right-0 after:bg-black hover:after:h-1 hover:after:-bottom-1 after:transition-all after:duration-150">sitemaps.org</a>.
+                            You can find more information about XML sitemaps on <a href="https://sitemaps.org" target="_blank" rel="noopener noreferrer" class="font-bold relative after:absolute after:-bottom-px after:h-px after:left-0 after:right-0 after:bg-black hover:after:h-1 hover:after:-bottom-1 after:transition-all after:duration-150">sitemaps.org</a>.
                         </p>
                     </footer>
                 </div>
@@ -258,7 +258,7 @@
                                             <span>
                                                 Updated at
                                                 <time datetime="{$lastmod}">
-                                                    <xsl:value-of select="sitemap:lastmod" />
+                                                <xsl:value-of select="sitemap:lastmod" />
                                                 </time>
                                             </span>
                                         </xsl:when>
