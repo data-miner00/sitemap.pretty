@@ -257,9 +257,9 @@
                                         <xsl:when test="sitemap:lastmod">
                                             <span>
                                                 Updated at
-                                                <time datetime="{$lastmod}">
-                                                <xsl:value-of select="sitemap:lastmod" />
-                                                </time>
+                                                <xsl:call-template name="format-date">
+                                                    <xsl:with-param name="datetime" select="sitemap:lastmod"/>
+                                                </xsl:call-template>
                                             </span>
                                         </xsl:when>
                                         <xsl:otherwise>
@@ -333,6 +333,21 @@
                 </xsl:for-each>
             </ul>
         </div>
+    </xsl:template>
+
+    <xsl:template name="format-date">
+        <xsl:param name="datetime" />
+        <xsl:if test="$datetime">
+            <time datetime="{$datetime}">
+                <xsl:value-of select="concat(
+                    substring($datetime, 9, 2),
+                    '/',
+                    substring($datetime, 6, 2),
+                    '/',
+                    substring($datetime, 1, 4)
+                )" />
+            </time>
+        </xsl:if>
     </xsl:template>
 
 </xsl:stylesheet>
