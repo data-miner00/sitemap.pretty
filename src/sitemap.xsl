@@ -7,7 +7,7 @@
     extension-element-prefixes="date"
 >
     <xsl:output method="html" doctype-public="XSLT-compat" encoding="UTF-8" indent="yes" />
-    
+
     <xsl:template match="/">
         <xsl:variable name="title">Sitemap</xsl:variable>
         <xsl:variable name="websiteUrl">
@@ -36,7 +36,7 @@
                 />
                 <title>
                     Sitemap
-                    
+
                     <xsl:if test="sitemap:sitemapindex">Index</xsl:if>
                 </title>
                 <link rel="stylesheet" href="tailwind.css" />
@@ -83,7 +83,7 @@
                             </xsl:choose>
                         </h1>
                     </header>
-                    
+
                     <main class="relative after:absolute after:left-0 after:right-0 after:lg:-left-full after:lg:-right-full after:h-px after:bg-black after:bottom-0" role="main" aria-label="Sitemap content">
                         <xsl:apply-templates />
                     </main>
@@ -256,7 +256,7 @@
                                 <xsl:value-of select="$pno" />
                             </div>
                         </div>
-                        
+
                         <div class="flex-1 px-4 md:px-6 py-6 md:py-0">
                             <div class="mb-4 md:mb-1">
                                 <a href="{$loc}" class="text-xl font-serif">
@@ -284,7 +284,7 @@
                                 </div>
 
                                 <div class="hidden md:block text-gray-400">/</div> 
-                                
+
                                 <div>
                                     <xsl:choose>
                                         <xsl:when test="sitemap:priority">
@@ -325,7 +325,7 @@
                                 </div>
 
                                 <div class="hidden md:block text-gray-400">/</div> 
-                                
+
                                 <div>
                                     <xsl:choose>
                                         <xsl:when test="sitemap:changefreq">
