@@ -212,7 +212,8 @@
 
     <xsl:template match="sitemap:urlset">
         <div>
-            <ul>
+            <h2 class="sr-only">List of URLs in sitemap</h2>
+            <ul aria-label="Sitemap URLs" role="list">
                 <xsl:for-each select="sitemap:url">
                     <xsl:variable name="loc">
                         <xsl:value-of select="sitemap:loc" />
@@ -251,7 +252,7 @@
                             </xsl:when>
                         </xsl:choose>
                     </xsl:variable>
-                    <li class="border-b border-solid border-black md:flex-row md:flex md:h-36 items-center last-of-type:border-b-0">
+                    <li class="border-b border-solid border-black md:flex-row md:flex md:h-36 items-center last-of-type:border-b-0" role="listitem">
                         <div class="md:basis-36 grid place-items-center h-20 md:h-full border-b md:border-b-0 md:border-r border-solid border-black w-full md:w-auto">
                             <div class="text-3xl font-mono">
                                 <xsl:if test="$pno &lt; 10">
@@ -263,7 +264,9 @@
 
                         <div class="flex-1 px-4 md:px-6 py-6 md:py-0">
                             <div class="mb-4 md:mb-1">
-                                <a href="{$loc}" class="text-xl font-serif">
+                                <a href="{$loc}" 
+                                   class="text-xl font-serif"
+                                   aria-label="Visit page at {sitemap:loc}">
                                     <xsl:value-of select="sitemap:loc" />
                                 </a>     
                             </div>
