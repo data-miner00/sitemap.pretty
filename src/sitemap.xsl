@@ -54,6 +54,10 @@
                 </style>
             </head>
             <body class="overflow-x-hidden" role="document">
+                <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-white focus:text-black">
+                    Skip to main content
+                </a>
+
                 <div class="w-full lg:w-[1080px] mx-auto py-5 lg:py-10 lg:border-l lg:border-r border-solid border-black">
                     <header class="py-2 md:py-8 relative after:absolute after:left-0 after:right-0 after:lg:-left-full after:lg:-right-full after:h-px after:bg-black after:bottom-0" role="banner" aria-label="Site header">
                         <div class="flex justify-between items-center px-4">
@@ -84,7 +88,7 @@
                         </h1>
                     </header>
 
-                    <main class="relative after:absolute after:left-0 after:right-0 after:lg:-left-full after:lg:-right-full after:h-px after:bg-black after:bottom-0" role="main" aria-label="Sitemap content">
+                    <main id="main-content" class="relative after:absolute after:left-0 after:right-0 after:lg:-left-full after:lg:-right-full after:h-px after:bg-black after:bottom-0" role="main" aria-label="Sitemap content">
                         <xsl:apply-templates />
                     </main>
 
