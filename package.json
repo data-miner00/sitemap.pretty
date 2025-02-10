@@ -1,7 +1,15 @@
 {
-  "name": "sitemap.pretty",
-  "version": "0.2.0",
-  "description": "Styles for sitemap.xml",
+  "name": "@mumk/sitemap.pretty",
+  "version": "0.3.0",
+  "description": "A collection of stylesheets for sitemap.xml",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/data-miner00/sitemap.pretty.git"
+  },
+  "bugs": {
+    "url": "https://github.com/data-miner00/sitemap.pretty/issues"
+  },
+  "homepage": "https://data-miner00.github.io/sitemap.pretty",
   "scripts": {
     "build": "npm run build:css && grunt",
     "dev": "grunt dev",

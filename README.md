@@ -73,3 +73,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 - [Video Sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/video-sitemaps)
 - [XSL Transform](http://xsltransform.net/)
 - [Format a date string with XSLT](https://stackoverflow.com/questions/47348406/format-a-date-string-with-xslt)
+- [Free Online XSLT Test Tool](https://xslttest.appspot.com/)
+- [XSLT Tutorial](https://w3schools.sinsixx.com/xsl/default.asp.htm)
+- [Formatting Dates and Times](https://www.oreilly.com/library/view/xslt-2nd-edition/9780596527211/ch04s05.html)
