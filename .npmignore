@@ -1,0 +1,10 @@
+node_modules
+tests
+.gitignore
+.prettierignore
+.npmignore
+.vscode
+.github
+package-lock.json
+images
+tailwind.config.js
