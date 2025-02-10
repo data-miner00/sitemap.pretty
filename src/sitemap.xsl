@@ -3,9 +3,11 @@
     version="2.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:date="http://exslt.org/dates-and-times"
+    extension-element-prefixes="date"
 >
-    <xsl:output method="html" doctype-public="XSLT-compat" version="1.0" encoding="UTF-8" indent="yes" />
-    
+    <xsl:output method="html" doctype-public="XSLT-compat" encoding="UTF-8" indent="yes" />
+
     <xsl:template match="/">
         <xsl:variable name="title">Sitemap</xsl:variable>
         <xsl:variable name="websiteUrl">
@@ -34,7 +36,7 @@
                 />
                 <title>
                     Sitemap
-                    
+
                     <xsl:if test="sitemap:sitemapindex">Index</xsl:if>
                 </title>
                 <link rel="stylesheet" href="tailwind.css" />
@@ -51,22 +53,29 @@
                     }
                 </style>
             </head>
-            <body class="overflow-x-hidden">
+            <body class="overflow-x-hidden" role="document">
+                <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-white focus:text-black">
+                    Skip to main content
+                </a>
+
                 <div class="w-full lg:w-[1080px] mx-auto py-5 lg:py-10 lg:border-l lg:border-r border-solid border-black">
-                    <header class="py-2 md:py-8 relative after:absolute after:left-0 after:right-0 after:lg:-left-full after:lg:-right-full after:h-px after:bg-black after:bottom-0">
+                    <header class="py-2 md:py-8 relative after:absolute after:left-0 after:right-0 after:lg:-left-full after:lg:-right-full after:h-px after:bg-black after:bottom-0" role="banner" aria-label="Site header">
                         <div class="flex justify-between items-center px-4">
-                            <div id="now">1 Jan 1998</div>
-                            <div class="flex gap-4 items-center">
-                                <a class="hidden md:block" title="Visit GitHub" href="{$gitHubUrl}" target="_blank">GitHub</a>
+                            <div id="now" aria-label="Current date">1 Jan 1998</div>
+                            <!-- <p>
+                                <xsl:value-of select="date:date-time()"/>
+                            </p> -->
+                            <nav class="flex gap-4 items-center" role="navigation" aria-label="Main navigation">
+                                <a class="hidden md:block" aria-label="Visit GitHub repository" href="{$gitHubUrl}" target="_blank" rel="noopener noreferrer">GitHub</a>
                                 <div class="hidden md:block">Sitemap version 2</div>
                                 <div class="italic hidden md:block">
                                     <xsl:value-of select="$websiteUrlWithoutProtocol"></xsl:value-of>
                                 </div> 
                                 <a href="{$websiteUrl}" class="block px-3 py-1 bg-black text-white hover:bg-gray-700 transition-colors duration-150">Return to website</a>
-                            </div>
+                            </nav>
                         </div>
 
-                        <h1 class="text-center text-6xl md:text-8xl lg:text-9xl uppercase py-10">
+                        <h1 class="text-center text-6xl md:text-8xl lg:text-9xl uppercase py-10" aria-label="Sitemap title">
                             Sitemap
                             <xsl:choose>
                                 <xsl:when test="sitemap:sitemapindex">
@@ -78,12 +87,12 @@
                             </xsl:choose>
                         </h1>
                     </header>
-                    
-                    <main class="relative after:absolute after:left-0 after:right-0 after:lg:-left-full after:lg:-right-full after:h-px after:bg-black after:bottom-0">
+
+                    <main id="main-content" class="relative after:absolute after:left-0 after:right-0 after:lg:-left-full after:lg:-right-full after:h-px after:bg-black after:bottom-0" role="main" aria-label="Sitemap content">
                         <xsl:apply-templates />
                     </main>
 
-                    <footer class="p-4">
+                    <footer class="p-4" role="contentinfo" aria-label="Site footer">
                         <p class="">
                             <xsl:choose>
                                 <xsl:when test="sitemap:sitemapindex">
@@ -100,8 +109,16 @@
                         </p>
                         <p>
                             This is an XML sitemap, meant for consumption by search engines.<br/>
-                            You can find more information about XML sitemaps on <a href="https://sitemaps.org" target="_blank" class="font-bold relative after:absolute after:-bottom-px after:h-px after:left-0 after:right-0 after:bg-black hover:after:h-1 hover:after:-bottom-1 after:transition-all after:duration-150">sitemaps.org</a>.
+                            You can find more information about XML sitemaps on <a href="https://sitemaps.org" target="_blank" rel="noopener noreferrer" class="font-bold relative after:absolute after:-bottom-px after:h-px after:left-0 after:right-0 after:bg-black hover:after:h-1 hover:after:-bottom-1 after:transition-all after:duration-150">sitemaps.org</a>.
                         </p>
+                        <p>
+                            This sitemap is rendered with XSLT version: <xsl:value-of select="system-property('xsl:version')"/>
+                        </p>
+                        <xsl:comment>
+                            XSLT Version = <xsl:copy-of select="system-property('xsl:version')"/>
+                            XSLT Vendor = <xsl:copy-of select="system-property('xsl:vendor')"/>
+                            XSLT Vendor URL = <xsl:copy-of select="system-property('xsl:vendor-url')"/>
+                        </xsl:comment>
                     </footer>
                 </div>
 
@@ -195,7 +212,8 @@
 
     <xsl:template match="sitemap:urlset">
         <div>
-            <ul>
+            <h2 class="sr-only">List of URLs in sitemap</h2>
+            <ul aria-label="Sitemap URLs" role="list">
                 <xsl:for-each select="sitemap:url">
                     <xsl:variable name="loc">
                         <xsl:value-of select="sitemap:loc" />
@@ -234,7 +252,7 @@
                             </xsl:when>
                         </xsl:choose>
                     </xsl:variable>
-                    <li class="border-b border-solid border-black md:flex-row md:flex md:h-36 items-center last-of-type:border-b-0">
+                    <li class="border-b border-solid border-black md:flex-row md:flex md:h-36 items-center last-of-type:border-b-0" role="listitem">
                         <div class="md:basis-36 grid place-items-center h-20 md:h-full border-b md:border-b-0 md:border-r border-solid border-black w-full md:w-auto">
                             <div class="text-3xl font-mono">
                                 <xsl:if test="$pno &lt; 10">
@@ -243,10 +261,12 @@
                                 <xsl:value-of select="$pno" />
                             </div>
                         </div>
-                        
+
                         <div class="flex-1 px-4 md:px-6 py-6 md:py-0">
                             <div class="mb-4 md:mb-1">
-                                <a href="{$loc}" class="text-xl font-serif">
+                                <a href="{$loc}" 
+                                   class="text-xl font-serif"
+                                   aria-label="Visit page at {sitemap:loc}">
                                     <xsl:value-of select="sitemap:loc" />
                                 </a>     
                             </div>
@@ -257,9 +277,9 @@
                                         <xsl:when test="sitemap:lastmod">
                                             <span>
                                                 Updated at
-                                                <time datetime="{$lastmod}">
-                                                    <xsl:value-of select="sitemap:lastmod" />
-                                                </time>
+                                                <xsl:call-template name="format-date">
+                                                    <xsl:with-param name="datetime" select="sitemap:lastmod"/>
+                                                </xsl:call-template>
                                             </span>
                                         </xsl:when>
                                         <xsl:otherwise>
@@ -271,7 +291,7 @@
                                 </div>
 
                                 <div class="hidden md:block text-gray-400">/</div> 
-                                
+
                                 <div>
                                     <xsl:choose>
                                         <xsl:when test="sitemap:priority">
@@ -312,7 +332,7 @@
                                 </div>
 
                                 <div class="hidden md:block text-gray-400">/</div> 
-                                
+
                                 <div>
                                     <xsl:choose>
                                         <xsl:when test="sitemap:changefreq">
@@ -333,6 +353,21 @@
                 </xsl:for-each>
             </ul>
         </div>
+    </xsl:template>
+
+    <xsl:template name="format-date">
+        <xsl:param name="datetime" />
+        <xsl:if test="$datetime">
+            <time datetime="{$datetime}">
+                <xsl:value-of select="concat(
+                    substring($datetime, 9, 2),
+                    '/',
+                    substring($datetime, 6, 2),
+                    '/',
+                    substring($datetime, 1, 4)
+                )" />
+            </time>
+        </xsl:if>
     </xsl:template>
 
 </xsl:stylesheet>
