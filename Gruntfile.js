@@ -11,7 +11,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask("default", [
     "copy",
-    "base64:css",
     "string-replace:xsl",
     "base64:xsl",
     "string-replace:xml",

@@ -18,7 +18,7 @@ module.exports = function (grunt) {
     vogue: {
       expand: true,
       cwd: "<%= srcPath %>",
-      src: ["sitemap.xml", "sitemapindex.xml", "sitemap.xsl"],
+      src: ["sitemap.xml", "sitemapindex.xml", "vogue.xsl"],
       dest: "<%= distPath %>",
       rename: function (src, dest) {
         return renameAux(src, dest, "vogue");
