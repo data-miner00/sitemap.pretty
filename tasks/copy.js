@@ -23,6 +23,11 @@ module.exports = function (grunt) {
       rename: function (src, dest) {
         return renameAux(src, dest, "vogue");
       },
+      options: {
+        process: function (content, srcpath) {
+          return content.replace("basic.xsl", "vogue.xsl");
+        },
+      },
     },
     basic: {
       expand: true,
