@@ -10,7 +10,13 @@ module.exports = function (grunt) {
     default: {
       expand: true,
       cwd: "<%= srcPath %>",
-      src: ["index.html", "sitemap.xml", "sitemap.xsl", "sitemapindex.xml"],
+      src: [
+        "index.html",
+        "sitemap.xml",
+        "sitemap.xsl",
+        "sitemapindex.xml",
+        "basic.xsl",
+      ],
       dest: "<%= distPath %>",
     },
   };
