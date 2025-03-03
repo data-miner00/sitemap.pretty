@@ -42,13 +42,26 @@
             </head>
             <body class="text-[var(--text-color)] leading-[1.5] max-w-[1200px] my-0 mx-auto p-4 bg-[var(--background)]">
                 <header class="border-b border-solid border-[var(--border-color)] pb-4 mb-8">
+                    <xsl:variable name="urlCount">
+                        <xsl:choose>
+                            <xsl:when test="sitemap:urlset">
+                                <xsl:value-of select="count(sitemap:urlset/sitemap:url)"/>
+                            </xsl:when>
+                            <xsl:when test="sitemap:sitemapindex">
+                                <xsl:value-of select="count(sitemap:sitemapindex/sitemap:sitemap)"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:text>0</xsl:text>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:variable>
                     <h1 class="text-[2rem] font-semibold">
                         Sitemap
                         
                         <xsl:if test="sitemap:sitemapindex">Index</xsl:if>
                     </h1>
                     <p>
-                        Total URLs: <strong><xsl:value-of select="count(sitemap:sitemapindex/sitemap:sitemap)"/></strong>
+                        Total URLs: <strong><xsl:value-of select="$urlCount" /></strong>
                     </p>
                 </header>
 
