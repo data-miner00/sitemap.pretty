@@ -3,12 +3,16 @@ var { test } = require("node:test");
 var { existsSync } = require("node:fs");
 
 [
-  "sitemap.xsl",
-  "sitemap.xml",
+  "basic.xsl",
+  "basic-encoded.txt",
+  "sitemap-basic.xml",
+  "sitemapindex-basic.xml",
+  "vogue.xsl",
+  "vogue-encoded.txt",
+  "sitemap-vogue.xml",
+  "sitemapindex-vogue.xml",
   "index.html",
   "tailwind.min.css",
-  "css-encoded.txt",
-  "xsl-encoded.txt",
 ].forEach((file) => {
   test(`${file} found in dist folder`, () => {
     assert.equal(existsSync(`dist/${file}`), true);

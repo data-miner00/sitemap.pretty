@@ -16,13 +16,13 @@ The `href` attribute is where it points to the XSLT stylesheet file. Here are th
 
 1. By CDN.
    ```xml
-   <?xml-stylesheet href="https://cdn.jsdelivr.net/npm/@mumk/sitemap.pretty@latest/dist/sitemap.xsl" type="text/xsl"?>
+   <?xml-stylesheet href="https://cdn.jsdelivr.net/npm/@mumk/sitemap.pretty@latest/dist/vogue.xsl" type="text/xsl"?>
    ```
-2. By base 64. The digest can be found in `xsl-encoded.txt` that starts with `data:text/xsl;base64` in the release artifact.
+2. By base 64. The digest can be found in `vogue-encoded.txt` that starts with `data:text/xsl;base64` in the release artifact.
    ```xml
    <?xml-stylesheet href="data:text/xsl;base64,PD94b...D4NCg==" type="text/xsl"?>
    ```
-3. Host the stylesheet yourself. You can download either `sitemap.xsl` or `sitemap.min.xsl` and host it in your hosting provider.
+3. Host the stylesheet yourself. You can download either `vogue.xsl` or `basic.xsl` and host it in your hosting provider.
 
 ## Getting Started
 
@@ -79,3 +79,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 - [Free Online XSLT Test Tool](https://xslttest.appspot.com/)
 - [XSLT Tutorial](https://w3schools.sinsixx.com/xsl/default.asp.htm)
 - [Formatting Dates and Times](https://www.oreilly.com/library/view/xslt-2nd-edition/9780596527211/ch04s05.html)
+- [XSLT XPath Tutorial](https://www.youtube.com/watch?v=WggVR4YI5oI)
+- [Introduction to XSLT and XQuery](https://www.saxonica.com/technology/xslt-and-xquery.xml)
+- https://www.w3schools.com/xml/xsl_elementref.asp

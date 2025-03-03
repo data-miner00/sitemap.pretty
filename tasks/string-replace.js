@@ -12,33 +12,16 @@ module.exports = function (grunt) {
         {
           expand: true,
           cwd: "<%= distPath %>",
-          src: ["sitemap.xsl"],
+          src: ["vogue.xsl", "basic.xsl"],
           dest: "<%= distPath %>",
         },
       ],
       options: {
         replacements: [
           {
-            pattern: "tailwind.css",
-            replacement: "<%= grunt.file.read('dist/css-encoded.txt') %>",
-          },
-        ],
-      },
-    },
-    xml: {
-      files: [
-        {
-          expand: true,
-          cwd: "<%= distPath %>",
-          src: ["sitemap.xml"],
-          dest: "<%= distPath %>",
-        },
-      ],
-      options: {
-        replacements: [
-          {
-            pattern: "sitemap.xsl",
-            replacement: "<%= grunt.file.read('dist/xsl-encoded.txt') %>",
+            pattern: '<link rel="stylesheet" href="tailwind.css" />',
+            replacement:
+              "<style>\n<%= grunt.file.read('dist/tailwind.min.css') %>\n</style>",
           },
         ],
       },
