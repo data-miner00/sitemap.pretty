@@ -26,24 +26,6 @@ module.exports = function (grunt) {
         ],
       },
     },
-    xml: {
-      files: [
-        {
-          expand: true,
-          cwd: "<%= distPath %>",
-          src: ["sitemap.xml"],
-          dest: "<%= distPath %>",
-        },
-      ],
-      options: {
-        replacements: [
-          {
-            pattern: "sitemap.xsl",
-            replacement: "<%= grunt.file.read('dist/xsl-encoded.txt') %>",
-          },
-        ],
-      },
-    },
   };
 
   grunt.config("string-replace", config);
