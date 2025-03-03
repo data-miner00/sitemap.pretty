@@ -16,13 +16,13 @@ The `href` attribute is where it points to the XSLT stylesheet file. Here are th
 
 1. By CDN.
    ```xml
-   <?xml-stylesheet href="https://cdn.jsdelivr.net/npm/@mumk/sitemap.pretty@latest/dist/sitemap.xsl" type="text/xsl"?>
+   <?xml-stylesheet href="https://cdn.jsdelivr.net/npm/@mumk/sitemap.pretty@latest/dist/vogue.xsl" type="text/xsl"?>
    ```
-2. By base 64. The digest can be found in `xsl-encoded.txt` that starts with `data:text/xsl;base64` in the release artifact.
+2. By base 64. The digest can be found in `vogue-encoded.txt` that starts with `data:text/xsl;base64` in the release artifact.
    ```xml
    <?xml-stylesheet href="data:text/xsl;base64,PD94b...D4NCg==" type="text/xsl"?>
    ```
-3. Host the stylesheet yourself. You can download either `sitemap.xsl` or `sitemap.min.xsl` and host it in your hosting provider.
+3. Host the stylesheet yourself. You can download either `vogue.xsl` or `basic.xsl` and host it in your hosting provider.
 
 ## Getting Started
 
