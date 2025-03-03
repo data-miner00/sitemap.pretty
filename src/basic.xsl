@@ -13,7 +13,11 @@
             <head>
                 <meta charset="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <title>Sitemap</title>
+                <title>
+                    Sitemap
+                
+                    <xsl:if test="sitemap:sitemapindex">Index</xsl:if>
+                </title>
 
                 <link rel="stylesheet" href="tailwind.css" />
                 <style>
@@ -38,9 +42,13 @@
             </head>
             <body class="text-[var(--text-color)] leading-[1.5] max-w-[1200px] my-0 mx-auto p-4 bg-[var(--background)]">
                 <header class="border-b border-solid border-[var(--border-color)] pb-4 mb-8">
-                    <h1 class="text-[2rem] font-semibold">Sitemap</h1>
-                    <p class="meta">
-                        Total URLs: <strong><xsl:value-of select="count(sitemap:urlset/sitemap:url)"/></strong>
+                    <h1 class="text-[2rem] font-semibold">
+                        Sitemap
+                        
+                        <xsl:if test="sitemap:sitemapindex">Index</xsl:if>
+                    </h1>
+                    <p>
+                        Total URLs: <strong><xsl:value-of select="count(sitemap:sitemapindex/sitemap:sitemap)"/></strong>
                     </p>
                 </header>
 
@@ -136,7 +144,49 @@
         </div>
     </xsl:template>
 
-    <xsl:template match="sitemap:loc[contains(text(), 'http://www.example.com/')]">
+    <xsl:variable name="websiteUrl">
+        <xsl:choose>
+            <xsl:when test="sitemap:urlset/sitemap:url[1]/sitemap:loc">
+                <xsl:value-of select="sitemap:urlset/sitemap:url[1]/sitemap:loc"/>
+            </xsl:when>
+            <xsl:when test="sitemap:sitemapindex/sitemap:sitemap[1]/sitemap:loc">
+                <xsl:value-of select="sitemap:sitemapindex/sitemap:sitemap[1]/sitemap:loc"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>www.example.com</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+
+    <xsl:template match="sitemap:sitemapindex">
+        <ul>
+            <xsl:for-each select="sitemap:sitemap">
+                <xsl:variable name="loc">
+                    <xsl:value-of select="sitemap:loc" />
+                </xsl:variable>
+                <xsl:variable name="pno">
+                    <xsl:value-of select="position()" />
+                </xsl:variable>
+
+                <li class="p-4 border-b border-solid border-[var(--border-color)] hover:bg-[var(--hover-bg)]">
+                    <a href="{$loc}" class="text-[var(--primary-color)] font-medium hover:underline" target="_blank">
+                        <xsl:value-of select="sitemap:loc"/>
+                    </a>
+                    <div class="flex gap-4 mt-2 text-sm text-[#666] dark:text-[#888]">
+                        <xsl:if test="sitemap:lastmod">
+                            <span>
+                                Updated: <xsl:call-template name="format-date">
+                                    <xsl:with-param name="datetime" select="sitemap:lastmod"/>
+                                </xsl:call-template>
+                            </span>
+                        </xsl:if>
+                    </div>
+                </li> 
+            </xsl:for-each> 
+        </ul>
+    </xsl:template>
+
+    <xsl:template match="sitemap:loc[contains(text(), $websiteUrl)]">
         <div class="bg-red-300">
             <xsl:apply-templates />
         </div>
