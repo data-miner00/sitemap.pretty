@@ -198,10 +198,4 @@
             </xsl:for-each> 
         </ul>
     </xsl:template>
-
-    <xsl:template match="sitemap:loc[contains(text(), $websiteUrl)]">
-        <div class="bg-red-300">
-            <xsl:apply-templates />
-        </div>
-    </xsl:template>
 </xsl:stylesheet>
